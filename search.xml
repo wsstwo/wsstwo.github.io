@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>00 关于CSS</title>
+    <url>/2022/05/17/00%20%E5%85%B3%E4%BA%8ECSS/</url>
+    <content><![CDATA[<p>CSS内一切html皆为盒子，盒模型及其衍生出来的诸多特殊属性都是服务于整个网页的排版设计。</p>
+<p>如果什么都不设置的情况下，一般在html中放置的元素都是<strong>标准文档流</strong>，在标准文档流中有两种排列方式，垂直排列和水平排列。</p>
+<p>css将页面元素分为了块级元素和行级元素。块级元素（比如标题、段落以及 div）是<strong>垂直排列</strong>，它的排列永远从新的一行开始；行级元素（比如图片以及 span）是<strong>水平排列</strong>，跟在上一个元素之后，直到页面缩放变形滚到下一行。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- div垂直排列 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- img水平排列 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../demo/mobile_1.jpg&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../demo/moblie_2.jpg&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span>			</span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330193236186.png" alt="以上代码的示范" style="zoom:65%;" />
+
+
+
+<p><strong>浮动流</strong></p>
+<p>与标准流（也可以叫文档流）相对应的是浮动流，其实说白了就是让元素脱离标准流单独浮动起来。</p>
+<p>在浮动流中，任何元素都可以水平排版，都可以设置宽高</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/01%20%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90/</url>
+    <content><![CDATA[<h1 id="弹性盒子"><a href="#弹性盒子" class="headerlink" title="弹性盒子"></a>弹性盒子</h1><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>弹性盒子是 CSS3 的一种新的布局模式。</p>
+<p>CSS3 弹性盒（ Flexible Box 或 flexbox），是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式。引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间。</p>
+<p>弹性盒子由弹性容器(Flex container)和弹性子元素(Flex item)组成。弹性容器通过设置 display 属性的值为 flex 或 inline-flex将其定义为弹性容器。弹性容器内包含了一个或多个弹性子元素。</p>
+<p>给元素添加 <code>display: flex</code> 属性可以让它变成 flex 容器， 然后可以让元素的项目排列成行或列。 只要给父元素添加 <code>flex-direction</code> 属性，并把属性值设置为 row（行） 或 column（列），即可横向排列或纵向排列它的所有子元素。 创建一行将使子项水平对齐，创建一列将使子项垂直对齐。</p>
+<p><code>flex-direction</code> 的其他可选值还有 <code>row-reverse</code> 和 <code>column-reverse</code>。</p>
+<table>
+<thead>
+<tr>
+<th>名称（flex-direction）</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row</td>
+<td>行向排列</td>
+</tr>
+<tr>
+<td>column</td>
+<td>列向排列</td>
+</tr>
+<tr>
+<td>row-reverse</td>
+<td>row，但是起点在另一端</td>
+</tr>
+<tr>
+<td>column</td>
+<td>column，但是起点在另一端</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong> <code>flex-direction</code> 的默认值为 <code>row</code>。</p>
+<h2 id="对齐容器元素"><a href="#对齐容器元素" class="headerlink" title="对齐容器元素"></a>对齐容器元素</h2><p>flex 子元素有时不能充满整个 flex 容器， 所以我们经常需要告诉 CSS 以什么方式排列 flex 子元素，以及调整它们的间距。 幸运的是，我们可以通过 <code>justify-content</code> 属性的不同值来实现。 在介绍属性的可选值之前，我们要先理解一些重要术语。</p>
+<p>回忆一下，如果把 flex 容器设为一个行，它的子元素会从左到右逐个排列； 如果把 flex 容器设为一个列，它的子元素会从上到下逐个排列。 子元素排列的方向被称为 <strong>main axis（主轴）</strong>。 对于行，主轴水平贯穿每一个项目； 对于列，主轴垂直贯穿每一个项目。</p>
+<p>对于如何沿主轴线排放 flex 项目，有几种选择。 很常用的一种是 <code>justify-content: center;</code>：即 flex 子元素在 flex 容器中居中排列。 其他选择包括：</p>
+<ul>
+<li><code>flex-start</code>：从 flex 容器的起始位置开始排列项目。 对行来说是把项目移至左边， 对于列是把项目移至顶部。 如未设置 <code>justify-content</code> 的值，那么这就是默认值。</li>
+<li><code>flex-end</code>：从 flex 容器的终止位置开始排列项目。 对行来说是把项目移至右边， 对于列是把项目移至底部。</li>
+<li><code>space-between</code>：项目间保留一定间距地沿主轴居中排列。 第一个和最后一个项目被放置在容器边沿。 例如，在行中第一个项目会紧贴着容器左边，最后一个项目会紧贴着容器右边，然后其他项目均匀排布。</li>
+<li><code>space-around</code>：与<code>space-between</code>相似，但头尾两个项目不会紧贴容器边缘，所有项目之间的空间均匀排布。</li>
+<li><code>space-evenly</code>：在 flex 项目之间均匀分配空间，在 flex 容器的任一端都有一个完整的空间。</li>
+</ul>
+<p><code>align-items</code> 属性与 <code>justify-content</code> 类似。 回忆一下，<code>justify-content</code> 属性使 flex 子元素沿主轴排列。 行的主轴是水平线，列的主轴是垂直线。</p>
+<p>Flex 容器中，与主轴垂直的叫做 <strong>cross axis（交叉轴）</strong>。 行的交叉轴是垂直的，列的交叉轴是水平的。</p>
+<p><strong>CSS 中的 <code>align-items</code> 属性用来定义 flex 子元素沿交叉轴的对齐方式</strong>。 对行来说，定义的是元素的上下对齐方式； 对列来说，是定义元素的左右对齐方式。</p>
+<p><code>align-items</code> 的可选值包括：</p>
+<ul>
+<li><code>flex-start</code>：从 flex 容器的起始位置开始对齐项目。 对行来说，把项目移至容器顶部； 对列来说，是把项目移至容器左边。</li>
+<li><code>flex-end</code>：从 flex 容器的终止位置开始对齐项目。 对行来说，把项目移至容器底部； 对列来说，把项目移至容器右边。</li>
+<li><code>center</code>：把项目居中放置。 对行来说，垂直居中（项目距离顶部和底部的距离相等）； 对列来说，水平居中（项目距离左边和右边的距离相等）。</li>
+<li><code>stretch</code>：拉伸项目，填满 flex 容器。 例如，排成行的项目从容器顶部拉伸到底部。 如未设置<code>align-items</code>的值，那么这就是默认值。</li>
+<li><code>baseline</code>：沿基线对齐。 基线是文本相关的概念，可以认为它是字母排列的下端基准线。</li>
+</ul>
+<h2 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h2><p>CSS flexbox 具有将 flex 容器拆分为多行（或列）的功能。 默认情况下，flex 容器会调整项目大小，把它们都塞到一起。 对于行来说，所有项目都会在一条直线上。</p>
+<p>不过，使用 <code>flex-wrap</code> 属性可以使项目换行展示。 这意味着多出来的子元素会被移到新的行或列。 换行发生的断点由子元素和容器的大小决定。</p>
+<p>换行方向的可选值有这些：</p>
+<ul>
+<li><code>nowrap</code>：默认值，不换行。</li>
+<li><code>wrap</code>：如果排列以行为基准，就将行从上往下排列；如果排列以列为基准，就将列从左往右排列。</li>
+<li><code>wrap-reverse</code>：如果排列以行为基准，就将行从下往上排列；如果排列以列为基准，就将列从右往左排列</li>
+</ul>
+<p>flex 子项目的最后一个属性是 <code>align-self</code>。 这个属性允许你调整单个子元素自己的对齐方式，而不会影响到全部子元素。 因为 <code>float</code>、<code>clear</code> 和 <code>vertical-align</code> 等调整对齐方式的属性都不能应用于 flex 子元素，所以这个属性显得十分有用。</p>
+<p><code>align-self</code> 可设置的值与 <code>align-items</code> 的一样，并且它会覆盖 <code>align-items</code> 所设置的值</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/03%20%E4%BD%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><p>CSS的定位属性<code>position</code>有很多种，比如<code>relative</code>和<code>absolute</code>，他们对元素的排版起着不同的帮助。</p>
+<p><code>position</code> 属性规定应用于元素的定位方法的类型。</p>
+<p>有五个不同的位置值：</p>
+<ul>
+<li>static</li>
+<li>relative</li>
+<li>fixed</li>
+<li>absolute</li>
+<li>sticky</li>
+</ul>
+<h2 id="01-static"><a href="#01-static" class="headerlink" title="01 static"></a>01 static</h2><p>html默认元素是静态的（static），它不受<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code>的影响，也就是说不论给他施加何种偏移，它都不会移动，因为它无视这些效果的影响。</p>
+<p>事实上，定位偏移属性更多是适用在非static元素上的，比如在<code>relative</code>中，这些属性会使它<strong>偏离默认位置</strong>，以默认位置为原点进行上下左右移动。</p>
+<p>特点：1.元素不会重叠，元素位置就是默认位置</p>
+<p>2.相邻元素都有内外边距</p>
+<h2 id="02-relative"><a href="#02-relative" class="headerlink" title="02 relative"></a>02 relative</h2><blockquote>
+<p>对象遵循常规流，并且参照自身在常规流中的位置通过<a href="https://css.doyoe.com/properties/positioning/top.htm">top</a>，<a href="https://css.doyoe.com/properties/positioning/right.htm">right</a>，<a href="https://css.doyoe.com/properties/positioning/bottom.htm">bottom</a>，<a href="https://css.doyoe.com/properties/positioning/left.htm">left</a>这4个定位偏移属性进行偏移时不会影响常规流中的任何元素。</p>
+</blockquote>
+<p>意思就是，relative可以通过定位偏移属性移动自己的元素，移动的原点是自己的默认位置。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">div</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">40px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: solid;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d1</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: static;//默认定位</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: <span class="number">#000000</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">100px</span>;//向右偏移属性（但是没用）</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d2</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: relative;//相对定位</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: <span class="number">#008000</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">100px</span>;//向右偏移属性（确实偏移了）</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d1&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d2&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>![image-20220330195840527](C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330195840527.png)</p>
+<h2 id="03-absolute"><a href="#03-absolute" class="headerlink" title="03 absolute"></a>03 absolute</h2><blockquote>
+<p>absolute:生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位，和 <code>relative</code> 定位不一样，绝对定位会将元素从当前的文档流里面移除，周围的元素会忽略它。</p>
+</blockquote>
+<p>意思就是absolute会不断向上追溯，直到发现首个非<code>static</code>元素，谁的标准不是static就以它为标准偏移。</p>
+<p>该如何理解呢？这里举个例子</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d1&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d3&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">div</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">40px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: solid;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d1</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: static;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: <span class="number">#000000</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d2</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: <span class="number">#008000</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d3</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: absolute;//absolute定位</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">100px</span>;//向右偏移，以首个不是static的元素(d2)为参考</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>![image-20220330201258012](C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330201258012.png)</p>
+<p>如果我们注释掉d3的absolute定位，那么他会找不到非static元素，也就只能乖乖按照默认位置偏移了。</p>
+<p>![image-20220330201314566](C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330201314566.png)</p>
+<p>此时d2和d3偏移量一致，所以重合。</p>
+<h2 id="04-fixed"><a href="#04-fixed" class="headerlink" title="04 fixed"></a>04 fixed</h2><blockquote>
+<p>position: fixed; 元素是相对于视口定位的，这意味着即使滚动页面，它也始终位于同一位置。 top、right、bottom 和 left 属性用于定位此元素。</p>
+</blockquote>
+<p>很好解释，fixed有固定的意思，它就好像将某个元素永久固定在窗口的某个位置，它无视侧边滚轮的上下移动，始终都会在那里。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d4&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.d4</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: fixed;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>: blue;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">right</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">bottom</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>![image-20220330202025031](C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330202025031.png)</p>
+<p>此刻它始终以<code>right: 0px; bottom: 0px;</code>的位置紧贴在右下角</p>
+<h2 id="05-sticky"><a href="#05-sticky" class="headerlink" title="05 sticky"></a>05 sticky</h2><blockquote>
+<p>粘性定位可以被认为是相对定位和固定定位的混合。元素在跨越特定阈值前为相对定位，之后为固定定位。但是跟固定定位又不太一样的，偏移值不会影响任何其他元素的位置。也就是说，没有脱离文档流。</p>
+</blockquote>
+<p>此定位出现较少，较多出现在导航栏。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>  <span class="attr">style</span>=<span class="string">&quot;height: 200px; overflow:scroll;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;background-color:lightgrey; position:sticky; top: 0px;&quot;</span>&gt;</span>This is header A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;background-color:lightgrey; position:sticky; top: 0px;&quot;</span>&gt;</span>This is header B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content B<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;background-color:lightgrey; position:sticky; top: 0px;&quot;</span>&gt;</span>This is header C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content C<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;background-color:lightgrey; position:sticky; top: 0px;&quot;</span>&gt;</span>This is header D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is content D<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此效果会实现不断更替首单词导航栏的效果：</p>
+<p>![image-20220330203020532](C:\Users\WELL SEA SUN\AppData\Roaming\Typora\typora-user-images\image-20220330203020532.png)</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/05%20%E6%B5%AE%E5%8A%A8/</url>
+    <content><![CDATA[<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><blockquote>
+<p>float:left\right</p>
+</blockquote>
+<p>浮动元素脱离文档流中，它向 <code>left</code> 或 <code>right</code> 浮动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。 也就是说，它被允许占在某个元素之上。</p>
+<p>向左浮动就是<code>float:left</code>，向右浮动就是<code>float:right</code></p>
+<p>通常需要用 <code>width</code> 属性来指定浮动元素占据的水平空间。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/07%20%E5%8A%A8%E7%94%BB/</url>
+    <content><![CDATA[<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><p>如果要给元素添加动画，你需要了解 animation 属性以及 <code>@keyframes</code> 规则。 animation 属性控制动画的外观，<code>@keyframes</code> 规则控制动画中各阶段的变化。 总共有 8 个 animation 属性。 为了便于理解，本挑战中我们只会暂时涉及到两个最常用的属性。</p>
+<p><code>animation-name</code> 用来设置动画的名称，也就是我们稍后要在 <code>@keyframes</code> 里用到的名称。</p>
+<p><code>animation-duration</code> 设置动画所花费的时间。</p>
+<p><code>@keyframes</code> 可以通过设置特定时间点的行为来创建动画。 为此，我们只需要给持续时间内的特定帧（从 0% 到 100%）加上 CSS 规则。 如果用一部电影来做类比，那么 CSS 里面的 0% 关键帧就像是电影里面的开场镜头；100% 关键帧就像是电影里的片尾，就是那个之后会出现演职人员列表的片尾。 在动画设定的时间内，CSS 会根据关键帧的规则来给元素添加动画效果。 100% 位置的 CSS 属性就是元素最后的样子，相当于电影里的演职员表或者鸣谢镜头。 然后CSS 应用魔法来在给定的时间内转换元素以使其脱离场景。 下面举例说明 <code>@keyframes</code> 和动画属性的用法：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#anim</span> &#123;</span><br><span class="line">  <span class="attribute">animation-name</span>: colorful;</span><br><span class="line">  <span class="attribute">animation-duration</span>: <span class="number">3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> colorful &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>id 为 <code>anim</code> 的元素，我们在代码中将它的 <code>animation-name</code> 设置为 <code>colorful</code>，同时设置 <code>animation-duration</code> 为 3 秒。 然后我们把 <code>@keyframes</code> 规则添加到名为 <code>colorful</code> 的动画属性上。 在动画开始时（0%）的背景颜色为蓝色，在动画结束时（100%）的背景颜色为黄色。 注意我们不只可以设置开始和结束，而是从 0% 到 100% 间的任意位置都可以设置。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/css%E9%9A%BE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="CSS问题"><a href="#CSS问题" class="headerlink" title="CSS问题"></a>CSS问题</h1><h3 id="问题1：元素居中"><a href="#问题1：元素居中" class="headerlink" title="问题1：元素居中"></a>问题1：元素居中</h3><h4 id="原理：位置"><a href="#原理：位置" class="headerlink" title="原理：位置"></a>原理：位置</h4><p>要想实现元素居中，需要先把握对应元素的定位属性是什么，然后再去找寻它的父级元素。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/05/06/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/06%20%E4%BC%AA%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="伪类和伪元素"><a href="#伪类和伪元素" class="headerlink" title="伪类和伪元素"></a>伪类和伪元素</h1><blockquote>
+<p>CSS introduces the concepts of pseudo-elements and pseudo-classes to permit formatting based on information that lies outside the document tree.直译过来就是：css引入伪类和伪元素概念是为了格式化文档树以外的信息。也就是说，伪类和伪元素是用来修饰不在文档树中的部分</p>
+</blockquote>
+<p><strong>单冒号(:)表示伪类，双冒号(::)表示伪元素。</strong>CSS3规范中的要求使用双冒号(::)表示伪元素，以此来区分伪元素和伪类，比如<code>::before</code>和<code>::after</code>等伪元素使用双冒号(::)，<code>:hover</code>和<code>:active</code>等伪类使用单冒号(:)。</p>
+<p><code>::before</code> 创建一个伪元素，它是所选元素的第一个子元素； <code>::after</code> 创建一个伪元素，它是所选元素的最后一个子元素。</p>
+<blockquote>
+<p><code>::before</code> 和 <code>::after</code> 必须配合 <code>content</code> 来使用。 这个属性通常用来给元素添加内容诸如图片或者文字。 尽管有时 <code>::before</code> 和 <code>::after</code> 是用来实现形状而非文字，但 <code>content</code> 属性仍然是必需的，此时它的值可以是空字符串。</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/05/17/04%20%E7%BD%91%E9%A1%B5%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="页面设计"><a href="#页面设计" class="headerlink" title="页面设计"></a>页面设计</h1><p>HTML5 引入了一些新元素，给予开发者更多的选择，也包含辅助功能。 HTML5 引入了诸如 <code>main</code>、<code>header</code>、<code>footer</code>、<code>nav</code>、<code>article</code>、<code>section</code> 等大量新标签。</p>
+<p>默认情况下，浏览器呈现这些元素的方式类似于普通的 <code>div</code>。 但是，在适当的地方使用它们会让标记文本具有更多的含义。 仅标签名称就可以表示它所包含的信息类型，这给内容增加了语义含义。 辅助技术可以获取这种信息，为用户提供更好的页面摘要或导航选项。</p>
+<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p><code>main</code> 标签用于呈现网页的主体内容，且每个页面应只有一个。 这是为了围绕与页面中心主题相关的信息， 而不应包含如导航连接、网页横幅等需要在多个页面中重复出现的内容。</p>
+<p><code>main</code> 标签也有一个内嵌的特性，以便辅助技术快速定位到页面的主体。 如果你在页面顶部看到过“跳转到主要内容”链接，那么使用 <code>main</code> 标签会自动让辅助设备具有这个跳转的功能。</p>
+<h2 id="article"><a href="#article" class="headerlink" title="article"></a>article</h2><p><code>article</code> 是另一个具有语义化特性的 HTML5 新标签。 <code>article</code> 是一个分段标签，用于呈现独立及完整的内容。 这个标签适用于博客、论坛帖子或者新闻文章。</p>
+<p>确定内容是否可以单独作为一部分，通常是个人的判断，但你可以使用几个简单的测试。 如果删除了所有周围的上下文，这个内容是否仍然有意义？ 类似地，对于文本内容，可否把这些内容放到一个 RSS 推送里？</p>
+<p>请牢记，辅助设备依赖组织良好、语义化的标签来获取页面中的信息。</p>
+<p><strong>注意：</strong> <code>section</code> 元素也是 HTML5 引入的新元素，其语义与 <code>article</code> 略有不同。 <code>article</code> 用于独立且完整的内容，而 <code>section</code> 用于对与主题相关的内容进行分组。 它们可以根据需要来嵌套使用。 举个例子：如果一本书是一个 <code>article</code> 的话，那么每个章节就是 <code>section</code>。 当内容组之间没有联系时，我们可以使用 <code>div</code>。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Deep Thoughts with Master Camper Cat<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>The Garfield Files: Lasagna as Training Fuel?<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let&#x27;s turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="header"><a href="#header" class="headerlink" title="header"></a>header</h2><p><code>header</code> 也是一个具有语义化的、可以提升页面可访问性的 HTML5 标签。 它可以为父级标签呈现简介信息或者导航链接，适用于那些在多个页面顶部重复出现的内容。</p>
+<p>与 <code>main</code> 类似，<code>header</code> 的语义化特性也可以让辅助工具快速定位到它的内容。</p>
+<p><strong>注意：</strong> <code>header</code> 应当在 HTML 文档的 <code>body</code> 标签内使用。 <strong>它与包含页面标题、元信息的 <code>head</code> 标签不同。</strong></p>
+<h2 id="nav"><a href="#nav" class="headerlink" title="nav"></a>nav</h2><p><code>nav</code> 也是一个具有语义化特性的 HTML5 标签，它可以使屏幕阅读器快速识别出页面中的导航信息。 它用于呈现页面中的主导航链接。</p>
+<p>对于在多个页面底部出现的站点链接，我们不需要使用 <code>nav</code> 标签。 我们将会在下个挑战中学习 <code>footer</code> 标签的使用。</p>
+<h2 id="footer"><a href="#footer" class="headerlink" title="footer"></a>footer</h2><p>与 <code>header</code> 和 <code>nav</code> 类似，<code>footer</code> 元素也具有语义化的特性，可以让辅助工具快速定位到它。 它位于页面底部，用于呈现版权信息或者相关文档链接。</p>
+<h2 id="一些特殊的标签"><a href="#一些特殊的标签" class="headerlink" title="一些特殊的标签"></a>一些特殊的标签</h2><h3 id="fieldset"><a href="#fieldset" class="headerlink" title="fieldset"></a>fieldset</h3><p><code>fieldset</code> 标签包裹整组单选按钮，实现这个功能。 它经常使用 <code>legend</code> 标签来提供分组的描述，以便屏幕阅读器用户会阅读 <code>fieldset</code> 元素中的每个选项。</p>
+<p>当选项的含义很明确时，如“性别选择”，<code>fieldset</code> 与 <code>legend</code> 标签可以省略。 这时，使用包含 <code>for</code> 属性的 <code>label</code> 标签就足够了。</p>
+<p>举个例子：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Choose one of these three items:<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;one&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">value</span>=<span class="string">&quot;one&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;one&quot;</span>&gt;</span>Choice One<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;two&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">value</span>=<span class="string">&quot;two&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;two&quot;</span>&gt;</span>Choice Two<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;three&quot;</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">value</span>=<span class="string">&quot;three&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;three&quot;</span>&gt;</span>Choice Three<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="accesskey"><a href="#accesskey" class="headerlink" title="accesskey"></a>accesskey</h3><p>HTML 提供 <code>accesskey</code> 属性，用于指定激活元素或者使元素获得焦点的快捷键。 添加 <code>accesskey</code> 属性可以让使用键盘的用户更高效率地导航。</p>
+<p>HTML5 允许在任何标签上使用这个属性。 该属性尤其适用于链接、按钮、表单组件等元素。</p>
+]]></content>
+  </entry>
+</search>
